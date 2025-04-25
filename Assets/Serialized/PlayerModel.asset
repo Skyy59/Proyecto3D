@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4c48e66e9161624f89d8353f9112f1e, type: 3}
   m_Name: PlayerModel
   m_EditorClassIdentifier: 
-  speed: 3
-  gravity: -1.5
+  speed: 2
+  gravity: -9.8
   jumpGravity: 0.01
   rotationSpeed: 10
   layerMask:
