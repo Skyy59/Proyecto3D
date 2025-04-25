@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform GCheck;
     [SerializeField] private Vector2 GCheckSize = new Vector2(0.49f, 0.03f);
     [SerializeField] private LayerMask Ground;
-
+        
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         _ctr = transform.parent.GetComponentInChildren<CharacterController>();
         _fsm = transform.parent.GetComponentInChildren<PlayerStateMachine>();
 
-        Cursor.visible = false;
+        
     }
 
     // Update is called once per frame
@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
         ApplyGravity();
         UpdateView();
     }
+
 
     void HandleInput()
     {
@@ -66,7 +67,7 @@ public class PlayerController : MonoBehaviour
     void ApplyGravity()
     {
 
-        if (_grounded)
+        if (_grounded && _verticalVelocity < 0)
         {
             _verticalVelocity = -0.1f; 
         }
