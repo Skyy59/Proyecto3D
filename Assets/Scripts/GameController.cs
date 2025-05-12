@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour
 {
     private Vector3 _lastCheckpos;
     [SerializeField] private CharacterController _cctr;
-    AIController _controller;
+   
 
     private void Start()
     {

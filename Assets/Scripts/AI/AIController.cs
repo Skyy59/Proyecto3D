@@ -5,35 +5,45 @@ using UnityEngine.Scripting.APIUpdating;
 
 public class AIController : MonoBehaviour
 {
-
+    #region Movement NAVAgent
     [SerializeField] private NavMeshAgent _navAgent;
     [SerializeField] private float _startWaitTime = 4f;
     [SerializeField] private float _timeToRotate = 2f;
     [SerializeField] private float _speedWalk = 6f;
     [SerializeField] private float _speedRun = 9f;
+    #endregion
 
+    #region FOV NAVAgent
     [SerializeField] private float _viewRadius = 15f;
     [SerializeField] private float _viewAngle = 90f;
     [SerializeField] private LayerMask _playerMask;
     [SerializeField] private LayerMask _obstacleMask;
+    #endregion
 
-
+    #region PatrolWP
     public Transform[] waypoints;
     int _CurrentWaypointIndex;
+    #endregion
 
+    #region PostionPlayerCheck
     Vector3 playerLastPosition = Vector3.zero;
     Vector3 _PlayerPosition;
+    #endregion
 
     float _WaitTime;
     float _TimeRotate;
     bool _PlayerInRange;
     bool _PlayerNear;
     bool _IsPatrol;
+    bool _isPlayerHidden;
     public bool caughtPlayer;
 
-    public float leftAngle = -45f;
-    public float rightAngle = 45f;
-    public float speed = 1f;
+    #region PlayerLostTimers
+    [SerializeField] private float _waitTimerAfterLoss = 3f;
+    private float _lossTimer;
+    #endregion
+
+
 
     void Start()
     {
@@ -43,6 +53,7 @@ public class AIController : MonoBehaviour
         _PlayerInRange = false;
         _WaitTime = _startWaitTime;
         _TimeRotate = _timeToRotate;
+        _isPlayerHidden = false;
 
         _startWaitTime = 4;
 
@@ -69,7 +80,7 @@ public class AIController : MonoBehaviour
 
         }
 
-        
+
     }
 
     private void Chasing()
@@ -82,7 +93,7 @@ public class AIController : MonoBehaviour
             Move(_speedRun);
             _navAgent.SetDestination(_PlayerPosition);
         }
-        if(_navAgent.remainingDistance <= _navAgent.stoppingDistance)
+        if (_navAgent.remainingDistance <= _navAgent.stoppingDistance)
         {
             if (_WaitTime <= 0 && !caughtPlayer && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 6f)
             {
@@ -95,11 +106,11 @@ public class AIController : MonoBehaviour
             }
             else
             {
-                if(Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 2.5f)
+                if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 2.5f)
                 {
                     Stop();
                     _WaitTime -= Time.deltaTime;
-                    
+
                 }
             }
         }
@@ -132,7 +143,7 @@ public class AIController : MonoBehaviour
                 {
                     NextWaypoint();
                     Move(_speedWalk);
-                    _WaitTime = _startWaitTime; 
+                    _WaitTime = _startWaitTime;
                 }
                 else
                 {
@@ -142,7 +153,7 @@ public class AIController : MonoBehaviour
             }
             else
             {
-                Move(_speedWalk); 
+                Move(_speedWalk);
             }
         }
     }
@@ -166,7 +177,7 @@ public class AIController : MonoBehaviour
         _navAgent.SetDestination(waypoints[_CurrentWaypointIndex].position);
     }
 
-    void CaughtPlayer() 
+    void CaughtPlayer()
     {
         caughtPlayer = true;
     }
@@ -190,7 +201,7 @@ public class AIController : MonoBehaviour
             {
                 Stop();
                 _WaitTime -= Time.deltaTime;
-                
+
             }
         }
     }
@@ -226,20 +237,36 @@ public class AIController : MonoBehaviour
             {
                 _PlayerPosition = player.transform.position;
             }
+
+            
         }
+
+
+        if (_PlayerInRange == false || _isPlayerHidden)
+        {
+            _PlayerInRange = false;
+            _IsPatrol = true;
+            _navAgent.SetDestination(waypoints[_CurrentWaypointIndex].position);
+        }
+
+
+
+
     }
-
-
-
+    public void SetPlayerHidden(bool isHidden)
+    {
+        _isPlayerHidden = isHidden;
+   
+    }
 
     void OnDrawGizmosSelected()
     {
         // Dibuja la esfera de detección (verde semitransparente)
-        Gizmos.color = new Color(0f, 1f, 0f, 1f); 
+        Gizmos.color = new Color(0f, 1f, 0f, 1f);
         Gizmos.DrawWireSphere(transform.position, _viewRadius);
 
         // Dibuja el cono de visión (rojo semitransparente)
-        Gizmos.color = new Color(1f, 0f, 0f, 1f); 
+        Gizmos.color = new Color(1f, 0f, 0f, 1f);
         Vector3 dir1 = Quaternion.Euler(0, _viewAngle / 2, 0) * transform.forward;
         Vector3 dir2 = Quaternion.Euler(0, -_viewAngle / 2, 0) * transform.forward;
         Gizmos.DrawLine(transform.position, transform.position + dir1 * _viewRadius);

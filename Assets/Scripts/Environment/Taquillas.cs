@@ -7,6 +7,7 @@ public class Taquillas : MonoBehaviour
     [SerializeField] Transform _ttr;
     [SerializeField] Transform _cameras;
     [SerializeField] private GameObject player;
+    [SerializeField] private AIController _AIctr;
     public bool isOnTrigger;
     public bool isVisible;
 
@@ -14,16 +15,17 @@ public class Taquillas : MonoBehaviour
     void Start()
     {
         isVisible = true;
+        _AIctr.SetPlayerHidden(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(isOnTrigger == true && Input.GetKeyDown(KeyCode.Space))
+        if (isOnTrigger == true && Input.GetKeyDown(KeyCode.Space))
         {
 
             CheckOnThis();
-            
+
         }
 
     }
@@ -31,7 +33,7 @@ public class Taquillas : MonoBehaviour
 
     private void OnTriggerStay(Collider col)
     {
-        if(col.transform.tag == "Player")
+        if (col.transform.tag == "Player")
         {
             isOnTrigger = true;
         }
@@ -50,6 +52,15 @@ public class Taquillas : MonoBehaviour
 
         isVisible = !isVisible;
         player.SetActive(isVisible);
-    }
 
+        if (isVisible)
+        {
+            _AIctr.SetPlayerHidden(false); // Jugador visible, la IA puede perseguirlo
+        }
+        else
+        {
+            _AIctr.SetPlayerHidden(true); // Jugador oculto, la IA ya no lo detecta
+        }
+
+    }
 }
