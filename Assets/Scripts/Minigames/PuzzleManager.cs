@@ -6,7 +6,23 @@ public class PuzzleManager : MonoBehaviour
 
     public void ShowPuzzle(int index)
     {
+        GameObject _puzzle = puzzlePanels[index];
+        LocksController _locks = _puzzle.GetComponent<LocksController>();
         
+        if (_locks)
+        {
+            if (_locks.puzzleResuelto)
+            {
+                Sex.Instance.sus = true;
+                Sex.Instance.timer = 0f;
+
+                return;
+            }
+
+        }
+     
+
+
         puzzlePanels[index].SetActive(true);
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;

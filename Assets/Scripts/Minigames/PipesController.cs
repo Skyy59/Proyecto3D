@@ -3,7 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public class ValidRotationsButtons
 {
-    public int[] rotaciones; // Lista de rotaciones válidas para este botón (en grados, eje Z)
+    public int[] rotaciones; 
 }
 
 public class PipesController : MonoBehaviour
@@ -20,7 +20,7 @@ public class PipesController : MonoBehaviour
     public RectTransform[] botones; 
 
     [Header("Rotaciones válidas por botón")]
-    public ValidRotationsButtons[] rotacionesObjetivo; // Rotaciones correctas por botón
+    public ValidRotationsButtons[] rotacionesObjetivo; 
 
  
 

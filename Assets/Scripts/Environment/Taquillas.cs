@@ -15,7 +15,7 @@ public class Taquillas : MonoBehaviour
     void Start()
     {
         isVisible = true;
-        _AIctr.SetPlayerHidden(false);
+        UpdateAllAIHiddenState(false);
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class Taquillas : MonoBehaviour
 
     private void OnTriggerStay(Collider col)
     {
-        if (col.transform.tag == "Player")
+        if (col.CompareTag("Player"))
         {
             isOnTrigger = true;
         }
@@ -41,7 +41,7 @@ public class Taquillas : MonoBehaviour
 
     private void OnTriggerExit(Collider col)
     {
-        if (col.transform.tag == "Player")
+        if (col.CompareTag("Player"))
         {
             isOnTrigger = false;
         }
@@ -53,14 +53,21 @@ public class Taquillas : MonoBehaviour
         isVisible = !isVisible;
         player.SetActive(isVisible);
 
-        if (isVisible)
-        {
-            _AIctr.SetPlayerHidden(false); // Jugador visible, la IA puede perseguirlo
-        }
-        else
-        {
-            _AIctr.SetPlayerHidden(true); // Jugador oculto, la IA ya no lo detecta
-        }
+        UpdateAllAIHiddenState(!isVisible);
 
+    }
+
+    void UpdateAllAIHiddenState(bool isHidden)
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in enemies)
+        {
+            AIController ai = enemy.GetComponent<AIController>();
+            if (ai != null)
+            {
+                ai.SetPlayerHidden(isHidden);
+            }
+        }
     }
 }

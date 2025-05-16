@@ -13,7 +13,7 @@ public class Lock : MonoBehaviour
         UpdateNumberDisplay();
     }
 
-    
+
 
     public void CycleNumber()
     {
@@ -31,5 +31,10 @@ public class Lock : MonoBehaviour
     private void UpdateNumberDisplay()
     {
         _numberText.text = _currentNumber.ToString();
+    }
+
+    public int GetCurrentNumber()
+    {
+        return _currentNumber;
     }
 }

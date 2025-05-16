@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         _ctr = transform.parent.GetComponentInChildren<CharacterController>();
         _fsm = transform.parent.GetComponentInChildren<PlayerStateMachine>();
 
-        
+        Cursor.visible = false;
     }
 
     // Update is called once per frame

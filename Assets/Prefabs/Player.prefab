@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3610795848442086258}
   - component: {fileID: 4656561639434651418}
   - component: {fileID: 3461951400252364099}
-  - component: {fileID: 1473867086847280774}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -69,20 +68,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6f674bf06ea52354292c2fc5c931013b, type: 2}
   - {fileID: 11400000, guid: ad517ff7da444d54ba21d12aa312f34d, type: 2}
   currentState: {fileID: 11400000, guid: 313efadd74298e647a147e99fc28d72d, type: 2}
---- !u!114 &1473867086847280774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1325627919432186123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9847795666a709c41bd2eb1a8d0969c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  MaxHealth: 100
 --- !u!1 &3897153043188484445
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +139,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cctr: {fileID: 2271115517517734603}
-  ded: 0
 --- !u!1 &5853975655737095547
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,6 +148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3343039835494187666}
+  - component: {fileID: 4446248639578569322}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -190,6 +175,14 @@ Transform:
   - {fileID: 5001534033942661484}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &4446248639578569322
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5853975655737095547}
+  m_Enabled: 1
 --- !u!1 &7599806128678405119
 GameObject:
   m_ObjectHideFlags: 0
