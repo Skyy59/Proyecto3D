@@ -39,7 +39,7 @@ public class AIController : MonoBehaviour
     public bool caughtPlayer;
 
     #region PlayerLostTimers
-    [SerializeField] private float _waitTimerAfterLoss = 3f;
+    
     private float _lossTimer;
     #endregion
 
@@ -73,6 +73,7 @@ public class AIController : MonoBehaviour
         if (!_IsPatrol)
         {
             Chasing();
+            
         }
         else
         {

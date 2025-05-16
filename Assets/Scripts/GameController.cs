@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.R))
         {
             Respawn();
             
