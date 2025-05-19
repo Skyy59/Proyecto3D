@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
         _horizontalMove = _horizontalMove.normalized;
         _horizontalMove *= model.speed;
         _horizontalMove.y = 0;
-        _animator.SetFloat("Speed", _horizontalMove.magnitude);
+        
 
 
         _grounded = IsGrounded();

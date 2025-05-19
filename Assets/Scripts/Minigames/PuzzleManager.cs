@@ -13,8 +13,7 @@ public class PuzzleManager : MonoBehaviour
         {
             if (_locks.puzzleResuelto)
             {
-                Sex.Instance.sus = true;
-                Sex.Instance.timer = 0f;
+               
 
                 return;
             }

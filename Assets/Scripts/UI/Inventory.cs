@@ -4,19 +4,32 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    public static Inventory Instance;
+
 
     public GameObject inventory;
     public GameObject collectibles;
     public GameObject invbutton;
     public GameObject collebutton;
 
+    public Item[] startitems;
+
     private bool menu;
 
     public ItemSlot[] itemSlot;
 
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
-        
+        for (int i = 0; i < startitems.Length; i++)
+        {
+            AddItem(startitems[i]);
+        }
     }
 
     // Update is called once per frame
@@ -44,13 +57,13 @@ public class Inventory : MonoBehaviour
     }
 
 
-    public void AddItem(string _itemName, int _quantity, Sprite _itemSprite, string itemDescription)
+    public void AddItem(Item _tuMadre)
     {
         for (int i = 0; i < itemSlot.Length; i++)
         {
             if (itemSlot[i].isFull == false)
             {
-                itemSlot[i].AddItem(_itemName, _quantity, _itemSprite, itemDescription);
+                itemSlot[i].AddItem(_tuMadre.itemName, _tuMadre.quantity, _tuMadre.sprite, _tuMadre.itemDescription);
                 return;
             }
 

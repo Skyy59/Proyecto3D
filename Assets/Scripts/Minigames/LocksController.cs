@@ -20,6 +20,8 @@ public class LocksController : MonoBehaviour
 
     public bool puzzleResuelto = false;
 
+    public Sex sex;
+    public Item itemToGive;
 
     void Update()
     {
@@ -30,10 +32,10 @@ public class LocksController : MonoBehaviour
         {
             puzzleResuelto = true;
 
-            
-            
-                CerrarEstePuzzle();
-                Sex.Instance.sus = true;
+
+            CerrarEstePuzzle();
+            sex.AsingItemData(itemToGive);
+            Inventory.Instance.AddItem(itemToGive);    
             
 
         }
@@ -66,7 +68,7 @@ public class LocksController : MonoBehaviour
     {
         uiPanel.SetActive(false); 
         Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Locked;
+        
         Cursor.visible = false;
     }
 
