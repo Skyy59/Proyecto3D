@@ -68,7 +68,7 @@ public class PipesController : MonoBehaviour
     {
         gameObject.SetActive(false); // Cierra el panel del puzzle actual
         Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Locked;
+        
         Cursor.visible = false;
     }
 

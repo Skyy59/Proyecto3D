@@ -39,7 +39,7 @@ public class CollectSlot : MonoBehaviour, IPointerClickHandler
     }
 
 
-    public void AddItem(string _collectName, int _quantity, Sprite _collectSprite, string collectDescription)
+    public void AddCollect(string _collectName, int _quantity, Sprite _collectSprite, string collectDescription)
     {
         this.collectName = _collectName;
         this.quantity = _quantity;
